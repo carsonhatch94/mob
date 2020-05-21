@@ -141,6 +141,8 @@ func main() {
 		next()
 	} else if command == "d" || command == "done" {
 		done()
+	} else if command == "a" || command == "aggro" {
+		aggro()
 	} else if command == "reset" {
 		reset()
 	} else if command == "config" {
@@ -159,6 +161,23 @@ func main() {
 	} else {
 		status()
 	}
+}
+
+func forceMobNext() {
+	timerDuration := time.Duration(1)
+
+	t1 := time.NewTimer(timerDuration * time.Minute)
+	<-t1.C
+	complete := true
+
+	if complete == true {
+		next()
+	}
+}
+
+func aggro() {
+	start(nil)
+	forceMobNext()
 }
 
 func startTimer(timerInMinutes string) {
